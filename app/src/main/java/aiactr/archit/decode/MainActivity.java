@@ -1,6 +1,6 @@
 package aiactr.archit.decode;
 
-import android.content.Context;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -8,25 +8,37 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.google.android.gms.maps.model.LatLng;
+import org.json.JSONException;
+import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
     String ElectionDay = "2019-05-12";      //yyyy-mm-dd
     int flagBack = 1;
-    TextView pollingStationName;
-    EditText textEpic;
     LatLng cc = new LatLng(28.6505,77.2303);
     EditText epicNoEditText;
     EditText mobileNoEdiText;
-    Button button ;
+    private ProgressDialog pDialog;
+
+    ExpandableListView polling_listView;
+    ExpandableListAdapter polling_ListAdapter;
+    List<String> listPollingStationNames;
+    HashMap<String, String> listPSDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,17 +50,16 @@ public class MainActivity extends AppCompatActivity {
 
         //checking if elections complete
         checkDay();
-        textEpic = findViewById(R.id.etepicno);
-        pollingStationName = findViewById(R.id.name);
+//        textEpic = findViewById(R.id.etepicno);
+//        pollingStationName = findViewById(R.id.name);
         epicNoEditText= findViewById(R.id.idEpicNo);
         mobileNoEdiText = findViewById(R.id.idMobileNo);
 
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
-    }
+        pDialog = new ProgressDialog(this);
+        pDialog.setCancelable(true);
 
-    public void spinnerToast()
-    {
-        Toast.makeText(MainActivity.this, R.string.time_prompt, Toast.LENGTH_SHORT).show();
+        polling_listView = findViewById(R.id.expandable_list);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
     }
 
     @Override
@@ -70,8 +81,6 @@ public class MainActivity extends AppCompatActivity {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
         try{
             Date theDay = format.parse(ElectionDay);
-
-//            Log.i("date","today is "+date);
 
 //            if (today.after(theDay)> 0) {
             if (new Date().after(theDay)){
@@ -110,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
     {
         flagBack=0;
         PollingStationFragment pollingStationFragment = new PollingStationFragment();
+        getSetPollingStations();
         getSupportFragmentManager().beginTransaction().replace(R.id.container,pollingStationFragment).commit();
     }
     public void openInfo(View view)
@@ -134,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
     {
         flagBack=0;
         CandidateFragment candidateFragment = new CandidateFragment();
+        getSetCandidates();
         getSupportFragmentManager().beginTransaction().replace(R.id.container, candidateFragment).commit();
     }
     public void openFeedbackPage(View view)
@@ -170,6 +181,156 @@ public class MainActivity extends AppCompatActivity {
         //TODO search the names of polling station
     }
 
+    public void getSetPollingStations()
+    {
+        StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_GETLISTOFPS, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d("Download Candidate Data ", "Download Response: " + response);
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("success");
+
+                    // Check for error node in json
+                    if (!error) {
+                        //TODO change the list view using the details received
+                    } else {
+                        // Error in login. Get the error message
+                        String errorMsg = jObj.getString("error_msg");
+                        Toast.makeText(getApplicationContext(),
+                                errorMsg, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Download Failed", "Download Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+                hideDialog();
+            }
+        }) {};
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq);
+    }
+
+    public void getSelection(View view)
+    {
+        String id = "";
+        //get the id of the selected option
+        getPollingStationDetails(id);
+//        Boolean facility1;
+//        Boolean facility2;
+//        Boolean facility3;
+//        Boolean facility4;
+//        Boolean facility5;
+//        Boolean facility6;
+//        Boolean facility7;
+//        Boolean facility8;
+//        Boolean facility9;
+//        Boolean facility10;
+//        Boolean facility11;
+//        Boolean facility12;
+//        setAnswers(facility1, facility2, facility3, facility4, facility5, facility6, facility7, facility8, facility9, facility10, facility11, facility12);
+    }
+
+    public void setAnswers(Boolean facility1,Boolean facility2,Boolean facility3,Boolean facility4,Boolean facility5,Boolean facility6,Boolean facility7,Boolean facility8,Boolean facility9,Boolean facility10,Boolean facility11,Boolean facility12)
+    {
+//        if (facility1)
+//            setYes();
+//        if (facility2)
+//            setYes();
+//        if (facility3)
+//            setYes();
+//        if (facility4)
+//            setYes();
+//        if (facility5)
+//            setYes();
+//        if (facility6)
+//            setYes();
+//        if (facility7)
+//            setYes();
+//        if (facility8)
+//            setYes();
+//        if (facility9)
+//            setYes();
+//        if (facility10)
+//            setYes();
+//        if (facility11)
+//            setYes();
+//        if (facility12)
+//            setYes();
+    }
+
+    public void getPollingStationDetails(final String ps_id)
+    {
+        StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_GETPS, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d("Download Candidate Data ", "Download Response: " + response);
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+
+                    // Check for error node in json
+                    if (!error) {
+                        //TODO change the list view using the details received
+
+                    } else {
+                        // Error in login. Get the error message
+                        String errorMsg = jObj.getString("error_msg");
+                        Toast.makeText(getApplicationContext(),
+                                errorMsg, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Download Failed", "Download Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+                hideDialog();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("polling_station_id", ps_id);
+
+                return params;
+            }
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq);
+    }
+
+    public void setYes(TextView view)
+    {
+        view.setBackgroundColor(getColor(R.color.bg_yes));
+    }
+    public void setNo(TextView view)
+    {
+        view.setBackgroundColor(getColor(R.color.bg_no));
+    }
     ////////////////////////////////////////////////////////
     // For Fragment Information ////////////////////////////
     ////////////////////////////////////////////////////////
@@ -192,6 +353,49 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(uri)));
     }
 
+    public void getSetCandidates()
+    {
+        StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_CANDIDATES, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d("Download Candidate Data ", "Download Response: " + response);
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+
+                    // Check for error node in json
+                    if (!error) {
+                        //TODO change the list view using the details received
+
+                    } else {
+                        // Error in login. Get the error message
+                        String errorMsg = jObj.getString("error_msg");
+                        Toast.makeText(getApplicationContext(),
+                                errorMsg, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Download Failed", "Download Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+                hideDialog();
+            }
+        }) {};
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq);
+    }
+
     ////////////////////////////////////////////////////////
     // For Fragment Facilities /////////////////////////////
     ////////////////////////////////////////////////////////
@@ -207,16 +411,61 @@ public class MainActivity extends AppCompatActivity {
         epic = findViewById(R.id.idEpicNo);
         phoneNoEntered = mobile.getText().toString();
         epicEntered = epic.getText().toString();
-        if (checkAllFields(epicEntered, phoneNoEntered))
+        if (checkAllFields(epicEntered.trim(), phoneNoEntered.trim()))
         {
             saveInDatabase(epicEntered, phoneNoEntered);
             Toast.makeText(this, "You will get a SMS for confirmation", Toast.LENGTH_LONG).show();
+//            goHome();
         }
-        goHome();
     }
 
-    public void saveInDatabase(String epic, String phone){
-        //TODO save in database
+    public void saveInDatabase(final String epic, final String phone)
+    {
+
+        Log.i("here","1111111111111111111111111111111");
+        pDialog.setMessage("Saving Request...");
+        showDialog();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_FACILITIES, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.i("here","222222222222222222"+response);
+                    hideDialog();
+                    goHome();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.i("here","333333333333333333333333333"+error);
+                    Log.e("ERROR: ", "Server Error: " + error.getMessage());
+                    Toast.makeText(getApplicationContext(),
+                            error.getMessage(), Toast.LENGTH_LONG).show();
+                    hideDialog();
+                }
+            }){
+                @Override
+                protected Map<String, String> getParams() {
+                    Log.i("here","44444444444444444444444444444");
+                    // Posting parameters to login url
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("epic_number", epic);
+                    params.put("phone_no", phone);
+
+                    return params;
+                }
+            };
+            AppController appController = new AppController();
+            appController.addToRequestQueue(stringRequest);
+    }
+
+    private void showDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
+
+    private void hideDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
     }
 
 //    private void minimizeKeypad() {
@@ -240,9 +489,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean checkAllFields(String epic, String phone){
-
-       //Todo check the validity of the epic no from the database server , showing error toast if nothing is entered in epci no
-        if (epic.matches("")) {
+        if (epic.length()<9) {
             Toast.makeText(getApplicationContext(), "Error!!! Epic No Not entered", Toast.LENGTH_SHORT).show();
             return false;
         }

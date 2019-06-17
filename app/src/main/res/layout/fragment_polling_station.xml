@@ -27,47 +27,52 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="3dp"
+            android:contentDescription="@string/line"
             android:src="@color/colorPrimaryDark" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:padding="10dp">-->
 
-            <EditText
-                android:id="@+id/etepicno"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:drawableStart="@android:drawable/ic_menu_search"
-                android:gravity="center"
-                android:hint="Search by Name"
-                android:inputType="textShortMessage"
-                android:maxLength="9"
-                android:background="@color/white"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/description_cc" />
-            <Button
-                android:id="@+id/btnGo"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="GO"
-                android:layout_marginStart="10dp"
-                android:onClick="goButton"
-                android:layout_gravity="center" />
-        </LinearLayout>
+            <!--<EditText-->
+                <!--android:id="@+id/etepicno"-->
+                <!--android:layout_width="300dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:drawableStart="@android:drawable/ic_menu_search"-->
+                <!--android:gravity="center"-->
+                <!--android:hint="Search by Name"-->
+                <!--android:inputType="textShortMessage"-->
+                <!--android:maxLength="9"-->
+                <!--android:background="@color/white"-->
+                <!--android:padding="10dp"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textColorHint="@color/description_cc" />-->
+            <!--<Button-->
+                <!--android:id="@+id/btnGo"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:text="GO"-->
+                <!--android:layout_marginStart="10dp"-->
+                <!--android:onClick="goButton"-->
+                <!--android:layout_gravity="center" />-->
+        <!--</LinearLayout>-->
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="3dp"
+            android:contentDescription="@string/line"
             android:src="@color/colorPrimaryDark"/>
 
-        <ListView
+        <ExpandableListView
+            android:id="@+id/expandable_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
 
-        </ListView>
+        </ExpandableListView>
+
         <!--<LinearLayout-->
             <!--android:layout_width="match_parent"-->
             <!--android:visibility="invisible"-->
@@ -239,5 +244,4 @@
                 <!--android:src="@color/colorAccent"/>-->
         <!--</LinearLayout>-->
     </LinearLayout>
-    
 </android.support.constraint.ConstraintLayout>

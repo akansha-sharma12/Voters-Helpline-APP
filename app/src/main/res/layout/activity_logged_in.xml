@@ -23,15 +23,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/welcome"
-            android:textSize="20sp" />
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:layout_marginBottom="30dp"/>
 
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:textColor="@color/lbl_name"
-            android:textSize="24sp" />
+        <!--<TextView-->
+            <!--android:id="@+id/name"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:padding="10dp"-->
+            <!--android:textColor="@color/lbl_name"-->
+            <!--android:textSize="24sp" />-->
 
         <!--<TextView-->
             <!--android:id="@+id/email"-->
@@ -51,6 +54,7 @@
                 android:textColor="@color/black"
                 android:text="Enter Polling Station ID : "/>
             <EditText
+                android:id="@+id/station_id"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
@@ -68,6 +72,7 @@
                 android:textColor="@color/black"
                 android:text="Number of people in Queue"/>
             <EditText
+                android:id="@+id/queue"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:maxLength="3"
@@ -93,6 +98,7 @@
             android:layout_marginTop="40dip"
             android:background="@color/btn_logut_bg"
             android:text="@string/btn_logout"
+            android:onClick="logOut"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="15sp" />

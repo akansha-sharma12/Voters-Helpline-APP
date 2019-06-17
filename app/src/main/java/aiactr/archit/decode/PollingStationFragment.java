@@ -32,44 +32,44 @@ public class PollingStationFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_polling_station, container, false);
 
-        Button b = view.findViewById(R.id.btnGo);
-
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LinearLayout ll= view.findViewById(R.id.linearlayoutsecond);
-
-                EditText input = view.findViewById(R.id.etepicno);
-                EPIC = input.getText().toString();
-
-                getData();
-                if (DATA_FOUND==1)
-                {
-                    setData();
-                }
-
-                ll.setVisibility(View.VISIBLE);
-            }
-        });
-
-        Button nav = view.findViewById(R.id.navigate);
-        nav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigate();
-            }
-        });
-
-        StationName = view.findViewById(R.id.name);
-        img = view.findViewById(R.id.img);
+//        Button b = view.findViewById(R.id.btnGo);
+//
+//        b.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                LinearLayout ll= view.findViewById(R.id.linearlayoutsecond);
+//
+//                EditText input = view.findViewById(R.id.etepicno);
+//                EPIC = input.getText().toString();
+//
+//                getData();
+//                if (DATA_FOUND==1)
+//                {
+//                    setData();
+//                }
+//
+//                ll.setVisibility(View.VISIBLE);
+//            }
+//        });
+//
+//        Button nav = view.findViewById(R.id.navigate);
+//        nav.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                navigate();
+//            }
+//        });
+//
+//        StationName = view.findViewById(R.id.name);
+//        img = view.findViewById(R.id.img);
         return view;
     }
 
-    public void getData()
-    {
-        //TODO get the data for the entered epic number
-        DATA_FOUND=1;
-    }
+//    public void getData()
+//    {
+//        //TODO get the data for the entered epic number
+//        DATA_FOUND=1;
+//    }
 
     public void setData()
     {

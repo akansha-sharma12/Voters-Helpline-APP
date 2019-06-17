@@ -6,7 +6,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="5dp">
+        android:padding="5dp"
+        android:background="@color/home_background">
 
         <TextView
             android:layout_width="match_parent"
@@ -14,15 +15,13 @@
             android:text="Feedback"
             android:textStyle="bold"
             android:textSize="40sp"
-            android:textAlignment="center"
-            />
+            android:textAlignment="center" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="3dp"
             android:src="#223344"
-            android:layout_marginBottom="50dp"
-            />
+            android:layout_marginBottom="50dp" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,9 +32,7 @@
                 android:layout_height="wrap_content"
                 android:text="Rating : "
                 android:textStyle="italic"
-                android:textSize="30sp"
-
-                />
+                android:textSize="30sp" />
             <RatingBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,7 +48,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:padding="20dp"
+                android:padding="5dp"
                 android:hint="Write your suggestions/feedbacks/complaints."
                 android:textColor="#000000"
                 android:textColorHint="#808080"

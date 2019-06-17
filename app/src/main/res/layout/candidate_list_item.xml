@@ -1,0 +1,62 @@
+<android.support.v7.widget.CardView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    android:elevation="10dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cand1_name"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:padding="5dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cand1_party_name"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:padding="5dp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="20dp"
+                    android:scaleType="fitXY"
+                    android:contentDescription="@string/symbol"
+                    android:background="@drawable/party_symbol_1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/symbol"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:layout_marginStart="10dp" />
+            </LinearLayout>
+        </LinearLayout>
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="90dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/cand1_name"
+            android:background="@drawable/cand1_photo"
+            android:scaleType="fitXY"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

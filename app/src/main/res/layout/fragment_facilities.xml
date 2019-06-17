@@ -50,6 +50,7 @@
                         android:layout_weight="5"
                         android:textSize="25sp"
                         android:maxLength="9"
+                        android:layout_marginTop="50dp"
                         android:padding="10dp"
                         android:background="@drawable/rounded_corner"
                         android:textColorHint="@color/description_cc"

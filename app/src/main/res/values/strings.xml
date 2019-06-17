@@ -67,6 +67,8 @@
     <string name="home_feed">Your Feedback</string>
     <string name="home_login">Official\'s Login</string>
     <string name="home_third_gender">Facilities for Third Gender</string>
+
+    <!-- candidates fragment -->
     <string name="home_kyc">Know your Candidates</string>
     <string name="cand1_party_name">Party : Aam Admi Party</string>
     <string name="cand1_name">Name : Arvind Kejriwal</string>
@@ -78,8 +80,9 @@
     <string name="cand4_name">Name : Joker singh</string>
     <string name="cand5_party_name">Party : </string>
     <string name="cand5_name">Name : </string>
-    <string name="download_aff">Download Affidavit</string>
     <string name="symbol">Symbol</string>
+    <string name="nameHead">Name :</string>
+    <string name="partyHead">Party Name :</string>
 
     <!-- Google Maps API Key -->
     <string name="google_android_maps_api">AIzaSyBvW7aqZpx0APMdm9QDdfChI9pA09WHjMM</string>
@@ -109,4 +112,20 @@
 
     <!-- After Fragment -->
     <string name="result">Result to be announced yet</string>
+
+    <!-- Polling station Fragment -->
+    <string name="line">line</string>
+    <string name="ps_text_1">Ramp</string>
+    <string name="ps_text_2">Water</string>
+    <string name="ps_text_3">Furniture</string>
+    <string name="ps_text_4">Medical Aid</string>
+    <string name="ps_text_5">Lights</string>
+    <string name="ps_text_6">Help Desk</string>
+    <string name="ps_text_7">Toilet</string>
+    <string name="ps_text_8">Shade</string>
+    <string name="ps_text_9">Volunteers</string>
+    <string name="ps_text_10">Crèche for children</string>
+    <string name="ps_text_11">Queue Management</string>
+    <string name="ps_text_12">Police</string>
+
 </resources>
